@@ -1,5 +1,7 @@
 ﻿# AitiGo
 
+[![CI](https://github.com/afandisini/AitiGo/actions/workflows/ci.yml/badge.svg)](https://github.com/afandisini/AitiGo/actions/workflows/ci.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/afandisini/AitiGo)](https://goreportcard.com/report/github.com/afandisini/AitiGo) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 **AitiGo** adalah kerangka backend berbasis **Go** dengan gaya **MVC-like berlapis**, dibuat untuk konsistensi arsitektur, domain yang murni, dan kolaborasi AI yang tidak menyimpang.
 
 > Dibangun untuk jangka panjang.
@@ -79,19 +81,19 @@ aitigo check
 
 ## Workflow Rekomendasi (Contoh)
 
-1) Buat module baru:
+1. Buat module baru:
 
 ```
 aitigo make:crud article
 ```
 
-2) Tambahkan handler di controller `internal/app/http/controller/article_controller.go`.
+2. Tambahkan handler di controller `internal/app/http/controller/article_controller.go`.
 
-3) Implement usecase di `internal/domain/article`.
+3. Implement usecase di `internal/domain/article`.
 
-4) Implement repository di `internal/infra/repository`.
+4. Implement repository di `internal/infra/repository`.
 
-5) Wiring dependensi di `cmd/*`.
+5. Wiring dependensi di `cmd/*`.
 
 ---
 
