@@ -1,0 +1,38 @@
+aitigo/
+├─ AGENT.md                      # Agent utama (aturan global AitiGo)
+├─ cmd/
+│  └─ aitigo/
+│     ├─ AGENT.md                # Agent untuk entrypoint/CLI
+│     └─ main.go
+├─ internal/
+│  ├─ app/
+│  │  ├─ AGENT.md                # aturan layer app (boot/kernel)
+│  │  ├─ boot/
+│  │  │  ├─ AGENT.md             # bootstrap: config, provider, routes
+│  │  │  └─ ...
+│  │  ├─ http/
+│  │  │  ├─ AGENT.md             # HTTP layer rules
+│  │  │  ├─ controller/
+│  │  │  │  ├─ AGENT.md          # controller rules
+│  │  │  │  └─ ...
+│  │  │  ├─ middleware/
+│  │  │  │  ├─ AGENT.md
+│  │  │  │  └─ ...
+│  │  │  └─ response/
+│  │  │     ├─ AGENT.md
+│  │  │     └─ ...
+│  │  └─ view/
+│  │     ├─ AGENT.md             # templating & rendering rules
+│  │     └─ templates/...
+│  ├─ domain/
+│  │  ├─ AGENT.md                # domain rules (pure, no infra)
+│  │  └─ user/
+│  │     ├─ AGENT.md             # module user rules
+│  │     └─ ...
+│  └─ infra/
+│     ├─ AGENT.md                # infra rules (db, cache, external)
+│     └─ repository/...
+└─ routes/
+   ├─ AGENT.md
+   ├─ api.go
+   └─ web.go
