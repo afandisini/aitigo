@@ -9,7 +9,9 @@ import (
 
 func makeCrud(args []string) error {
 	if len(args) < 1 {
-		printCrudHelp(os.Stderr)
+		if err := printCrudHelp(os.Stderr); err != nil {
+			return err
+		}
 		return fmt.Errorf("module is required")
 	}
 	moduleArg := args[0]
@@ -23,7 +25,9 @@ func makeCrud(args []string) error {
 
 	module := normalizeModule(moduleArg)
 	if module == "" {
-		printCrudHelp(os.Stderr)
+		if err := printCrudHelp(os.Stderr); err != nil {
+			return err
+		}
 		return fmt.Errorf("module is required")
 	}
 
@@ -31,20 +35,23 @@ func makeCrud(args []string) error {
 }
 
 func generateCrud(module string, force bool) error {
-	moduleName := toPascal(module)
 	if err := generateModuleWithMode(module, force, true); err != nil {
 		return err
 	}
-	if err := generateServiceWithMode(moduleName+"Service", module, force, true); err != nil {
+	if err := generateServiceWithMode("Service", module, force, true); err != nil {
 		return err
 	}
-	if err := generateRepositoryWithMode(moduleName+"Repository", module, force, true); err != nil {
+	if err := generateRepositoryWithMode("Repository", module, force, true); err != nil {
 		return err
 	}
 	return nil
 }
 
-func printCrudHelp(w io.Writer) {
-	fmt.Fprintln(w, "Usage:")
-	fmt.Fprintln(w, "  aitigo make:crud <module> [--force]")
+func printCrudHelp(w io.Writer) error {
+	_, err := fmt.Fprintln(w, "Usage:")
+	if err != nil {
+		return err
+	}
+	_, err = fmt.Fprintln(w, "  aitigo make:crud <module> [--force]")
+	return err
 }

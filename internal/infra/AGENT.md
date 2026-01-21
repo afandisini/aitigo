@@ -13,7 +13,7 @@
 
 ## Tugas
 
-Implementasi detail teknis:
+Implementation details:
 
 - koneksi DB
 - repo PostgreSQL/MySQL

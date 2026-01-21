@@ -8,7 +8,7 @@ AITIGO adalah kerangka Go bergaya MVC-like untuk layanan HTTP. Prinsip utamanya:
 
 - `internal/app/http/controller`: HTTP adapter, parsing/validasi ringan, mapping DTO.
 - `internal/domain`: entity, value object, service, dan repository interface.
-- `internal/infra`: implementasi teknis (DB, cache, external API) yang memenuhi interface domain.
+- `internal/infra`: technical implementation (DB, cache, external API) that fulfills the domain interfaces.
 - `cmd`: wiring/entrypoint aplikasi.
 
 ## Diagram Boundary (Request -> DB)
@@ -49,16 +49,16 @@ flowchart TD
 
 - `internal/domain` tidak boleh import `internal/infra`, `internal/app/http`, `net/http` handler, framework router, atau DB driver.
 - `internal/app` boleh import `internal/domain` dan contract interface, tidak boleh akses DB langsung.
-- `internal/infra` boleh import `internal/domain` untuk implementasi interface.
+- `internal/infra` may import `internal/domain` for interface implementations.
 - Wiring dependensi hanya di `cmd/*` atau layer entrypoint.
 
 ## Pola Modul (Contoh: user)
 
 - `internal/domain/user/entity.go` (User entity)
-- `internal/domain/user/repository.go` (interface `UserRepository`)
+- `internal/domain/user/repository.go` (interface `Repository`)
 - `internal/domain/user/service.go` (service/usecase)
-- `internal/app/http/controller/user_controller.go` memanggil `UserService`
-- `internal/infra/repository/user_repo.go` mengimplement `UserRepository`
+- `internal/app/http/controller/user_controller.go` memanggil `Service`
+- `internal/infra/repository/user_repo.go` mengimplement `Repository`
 
 Alur: Controller -> Service -> Repository Interface -> Infra Repo -> DB.
 

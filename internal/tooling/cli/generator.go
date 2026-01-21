@@ -28,7 +28,9 @@ func generateModuleWithMode(module string, force bool, skipIfExists bool) error 
 		if err != nil {
 			return err
 		}
-		logWrite(f.path, status)
+		if err := logWrite(f.path, status); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -45,7 +47,9 @@ func generateControllerWithMode(name, module string, force bool, skipIfExists bo
 	if err != nil {
 		return err
 	}
-	logWrite(path, status)
+	if err := logWrite(path, status); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -61,7 +65,9 @@ func generateServiceWithMode(name, module string, force bool, skipIfExists bool)
 	if err != nil {
 		return err
 	}
-	logWrite(path, status)
+	if err := logWrite(path, status); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -84,19 +90,18 @@ func generateRepositoryWithMode(name, module string, force bool, skipIfExists bo
 	if err != nil {
 		return err
 	}
-	logWrite(interfacePath, status)
+	if err := logWrite(interfacePath, status); err != nil {
+		return err
+	}
 
 	status, err = writeFileWithMode(implPath, templateRepositoryImpl(pascalName+"Impl"), force, skipIfExists)
 	if err != nil {
 		return err
 	}
-	logWrite(implPath, status)
+	if err := logWrite(implPath, status); err != nil {
+		return err
+	}
 	return nil
-}
-
-func writeFileIfMissing(path, content string, force bool) error {
-	_, err := writeFileWithMode(path, content, force, false)
-	return err
 }
 
 func writeFileWithMode(path, content string, force bool, skipIfExists bool) (string, error) {
@@ -138,19 +143,19 @@ func moduleFiles(module string) []fileSpec {
 
 	return []fileSpec{
 		{filepath.Join(domainDir, "entity.go"), templateEntity(module, moduleName)},
-		{filepath.Join(domainDir, "repository.go"), templateRepositoryInterface(module, moduleName+"Repository")},
-		{filepath.Join(domainDir, "service.go"), templateService(module, moduleName+"Service")},
+		{filepath.Join(domainDir, "repository.go"), templateRepositoryInterface(module, "Repository")},
+		{filepath.Join(domainDir, "service.go"), templateService(module, "Service")},
 		{filepath.Join(controllerDir, module+"_controller.go"), templateController(moduleName+"Controller", module)},
 	}
 }
 
-func logWrite(path, status string) {
+func logWrite(path, status string) error {
 	switch status {
 	case "overwrite":
-		logOverwrite(path)
+		return logOverwrite(path)
 	case "skip":
-		logSkip(path)
+		return logSkip(path)
 	default:
-		logCreate(path)
+		return logCreate(path)
 	}
 }

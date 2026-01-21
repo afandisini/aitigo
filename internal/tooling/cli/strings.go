@@ -28,7 +28,6 @@ func toSnake(input string) string {
 		case unicode.IsUpper(r):
 			if prevLower {
 				b.WriteRune('_')
-				lastUnderscore = true
 			}
 			b.WriteRune(unicode.ToLower(r))
 			prevLower = false
@@ -57,8 +56,17 @@ func toPascal(input string) string {
 		}
 		runes := []rune(p)
 		runes[0] = unicode.ToUpper(runes[0])
+		hasUpper := false
 		for i := 1; i < len(runes); i++ {
-			runes[i] = unicode.ToLower(runes[i])
+			if unicode.IsUpper(runes[i]) {
+				hasUpper = true
+				break
+			}
+		}
+		if !hasUpper {
+			for i := 1; i < len(runes); i++ {
+				runes[i] = unicode.ToLower(runes[i])
+			}
 		}
 		b.WriteString(string(runes))
 	}

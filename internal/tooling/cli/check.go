@@ -56,14 +56,20 @@ func runCheck(args []string) error {
 	}
 
 	if len(violations) == 0 {
-		fmt.Println("AitiGo check: OK")
+		if _, err := fmt.Fprintln(os.Stdout, "AitiGo check: OK"); err != nil {
+			return err
+		}
 		return nil
 	}
 
 	for _, v := range violations {
-		fmt.Println(v)
+		if _, err := fmt.Fprintln(os.Stdout, v); err != nil {
+			return err
+		}
 	}
-	fmt.Printf("AitiGo check: %d violation(s)\n", len(violations))
+	if _, err := fmt.Fprintf(os.Stdout, "AitiGo check: %d violation(s)\n", len(violations)); err != nil {
+		return err
+	}
 	return fmt.Errorf("boundary check failed")
 }
 

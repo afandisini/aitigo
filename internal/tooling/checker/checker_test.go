@@ -2,9 +2,8 @@ package checker
 
 import "testing"
 
-func TestDummyChecker(t *testing.T) {
-	// test sengaja simple dulu
-	if true != true {
-		t.Fatal("unreachable, but keeps go test honest")
+func TestAlwaysPass(t *testing.T) {
+	if 1+1 != 2 {
+		t.Fatal("math is broken")
 	}
 }

@@ -61,7 +61,7 @@ Jika terjadi konflik aturan:
 #### ❌ Controller (`internal/app/http/controller`) DILARANG:
 - Query DB langsung
 - Logic bisnis kompleks
-- Implementasi repository
+- Repository implementation
 - Import DB driver / ORM
 - Import package infra
 

@@ -9,6 +9,27 @@ import (
 
 type commandHandler func(args []string) error
 
+const helpText = `AitiGo CLI
+
+Usage:
+  aitigo help
+  aitigo check
+  aitigo make:crud <module> [--force]
+  aitigo make:module <module>
+  aitigo make:controller <Name> --module <module> [--force]
+  aitigo make:service <Name> --module <module> [--force]
+  aitigo make:repository <Name> --module <module> [--force]
+
+Examples:
+  aitigo check
+  aitigo make:crud user
+  aitigo make:crud user --force
+  aitigo make:module user
+  aitigo make:controller UserController --module user
+  aitigo make:service UserService --module user --force
+  aitigo make:repository UserRepository --module user
+`
+
 func commands() map[string]commandHandler {
 	return map[string]commandHandler{
 		"check":           runCheck,
@@ -20,26 +41,9 @@ func commands() map[string]commandHandler {
 	}
 }
 
-func printHelp(w io.Writer) {
-	fmt.Fprintln(w, "AitiGo CLI")
-	fmt.Fprintln(w, "")
-	fmt.Fprintln(w, "Usage:")
-	fmt.Fprintln(w, "  aitigo help")
-	fmt.Fprintln(w, "  aitigo check")
-	fmt.Fprintln(w, "  aitigo make:crud <module> [--force]")
-	fmt.Fprintln(w, "  aitigo make:module <module>")
-	fmt.Fprintln(w, "  aitigo make:controller <Name> --module <module> [--force]")
-	fmt.Fprintln(w, "  aitigo make:service <Name> --module <module> [--force]")
-	fmt.Fprintln(w, "  aitigo make:repository <Name> --module <module> [--force]")
-	fmt.Fprintln(w, "")
-	fmt.Fprintln(w, "Examples:")
-	fmt.Fprintln(w, "  aitigo check")
-	fmt.Fprintln(w, "  aitigo make:crud user")
-	fmt.Fprintln(w, "  aitigo make:crud user --force")
-	fmt.Fprintln(w, "  aitigo make:module user")
-	fmt.Fprintln(w, "  aitigo make:controller UserController --module user")
-	fmt.Fprintln(w, "  aitigo make:service UserService --module user --force")
-	fmt.Fprintln(w, "  aitigo make:repository UserRepository --module user")
+func printHelp(w io.Writer) error {
+	_, err := fmt.Fprint(w, helpText)
+	return err
 }
 
 func makeModule(args []string) error {
@@ -94,14 +98,17 @@ func parseNamedCommand(args []string) (string, string, bool, error) {
 	return name, normalizeModule(*module), *force, nil
 }
 
-func logCreate(path string) {
-	fmt.Fprintf(os.Stdout, "create %s\n", path)
+func logCreate(path string) error {
+	_, err := fmt.Fprintf(os.Stdout, "create %s\n", path)
+	return err
 }
 
-func logOverwrite(path string) {
-	fmt.Fprintf(os.Stdout, "overwrite %s\n", path)
+func logOverwrite(path string) error {
+	_, err := fmt.Fprintf(os.Stdout, "overwrite %s\n", path)
+	return err
 }
 
-func logSkip(path string) {
-	fmt.Fprintf(os.Stdout, "skip %s (exists)\n", path)
+func logSkip(path string) error {
+	_, err := fmt.Fprintf(os.Stdout, "skip %s (exists)\n", path)
+	return err
 }

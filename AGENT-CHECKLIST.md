@@ -10,7 +10,7 @@
 ## Saat Coding
 
 - Ikuti konvensi naming dan response/error.
-- Jaga controller tipis, domain murni, infra hanya implementasi.
+- Jaga controller tipis, domain murni, infra hanya implementation.
 - Pertahankan struktur folder yang ada.
 
 ## Sebelum Selesai
