@@ -146,6 +146,7 @@ Setiap kali AI mengerjakan task:
 3. Pastikan tidak melanggar boundary
 4. Maksimal perubahan relevan (hindari scope melebar)
 5. Tidak “kreatif” di luar arsitektur
+6. Perubahan `templates/` harus tetap editor-friendly sebelum dependency terpasang; gunakan placeholder/shim minimal dan catat di README/struktur bila perlu
 
 Jika instruksi user:
 - Bertentangan dengan aturan ini -> **STOP & LAPORKAN**
@@ -160,3 +161,4 @@ Jika instruksi user:
 
 Kode boleh lambat ditulis,
 tapi **arsitektur tidak boleh rusak**.
+

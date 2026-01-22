@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-func runCheck(args []string) error {
+func runBoundaryCheck(args []string) error {
 	if len(args) > 0 {
 		return fmt.Errorf("check does not accept arguments")
 	}

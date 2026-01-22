@@ -1,0 +1,14 @@
+{
+  "id":"next-ts",
+  "name":"Next.js + TypeScript",
+  "description":"Next.js App Router + TS/TSX + ESLint + Prettier + pnpm",
+  "type":"frontend",
+  "packageManager":"pnpm",
+  "init":{"copy":true},
+  "check":{"commands":[
+    {"name":"lint","run":"pnpm lint"},
+    {"name":"typecheck","run":"pnpm typecheck"},
+    {"name":"test","run":"pnpm test","optional":true},
+    {"name":"build","run":"pnpm build"}
+  ]}
+}

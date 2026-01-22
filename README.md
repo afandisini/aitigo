@@ -1,4 +1,4 @@
-﻿# AitiGo
+# AitiGo
 
 [![CI](https://github.com/afandisini/AitiGo/actions/workflows/ci.yml/badge.svg)](https://github.com/afandisini/AitiGo/actions/workflows/ci.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/afandisini/AitiGo)](https://goreportcard.com/report/github.com/afandisini/AitiGo) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -22,16 +22,17 @@
 
 ```
 aitigo/
-├─ cmd/                         # Entrypoint & wiring
-├─ internal/
-│  ├─ app/                      # HTTP layer, kernel
-│  ├─ domain/                   # Entity, service, repo interface
-│  └─ infra/                    # DB, cache, external implementation
-├─ ARCHITECTURE.md
-├─ CONVENTIONS.md
-├─ AGENT.md                     # Aturan keras (absolut)
-├─ AGENT-CHECKLIST.md
-└─ README.md
+|-- cmd/                         # Entrypoint & wiring
+|-- internal/
+|   |-- app/                     # HTTP layer, kernel
+|   |-- domain/                  # Entity, service, repo interface
+|   `-- infra/                   # DB, cache, external implementation
+|-- templates/                   # Project templates (next-ts, nuxt-ts)
+|-- ARCHITECTURE.md
+|-- CONVENTIONS.md
+|-- AGENT.md                     # Aturan keras (absolut)
+|-- AGENT-CHECKLIST.md
+`-- README.md
 ```
 
 Detail lengkap lihat `ARCHITECTURE.md` dan `CONVENTIONS.md`.
@@ -79,6 +80,77 @@ aitigo check
 
 ---
 
+## How to use AitiGo with Next.js (next-ts)
+
+List template:
+
+```
+aitigo templates
+```
+
+Init project:
+
+```
+aitigo init next-ts myapp
+aitigo init next-ts .\myapp
+```
+
+Run dev server:
+
+```
+cd myapp
+pnpm i
+pnpm dev
+```
+
+Run checks:
+
+```
+cd ..
+aitigo check ./myapp
+```
+
+---
+
+## How to use AitiGo with Nuxt 3 (nuxt-ts)
+
+List template:
+
+```
+aitigo templates
+```
+
+Init project:
+
+```
+aitigo init nuxt-ts myapp
+aitigo init nuxt-ts .\myapp
+```
+
+Run dev server:
+
+```
+cd myapp
+pnpm i
+pnpm dev
+```
+
+Run checks:
+
+```
+cd ..
+aitigo check ./myapp
+```
+
+Catatan Windows:
+- Gunakan path relatif `.\myapp` jika perlu.
+- Pastikan `pnpm` tersedia di PATH.
+
+Catatan template Nuxt:
+- `templates/nuxt-ts` menyertakan shim `nuxt/config` dan placeholder `.nuxt/tsconfig.json` agar editor tidak error sebelum install dependency.
+
+---
+
 ## Workflow Rekomendasi (Contoh)
 
 1. Buat module baru:
@@ -123,7 +195,7 @@ Rujuk detail di `ARCHITECTURE.md` dan `CONVENTIONS.md`.
 
 ## Donasi
 
-### ☕ Donasi & Beli Kopi
+### Donasi & Beli Kopi
 
 Kalau AitiGo ngebantu kerjaanmu dan bikin hidup sedikit lebih waras,
 boleh traktir kopi biar maintainer kuat begadang.

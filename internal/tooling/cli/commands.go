@@ -13,31 +13,41 @@ const helpText = `AitiGo CLI
 
 Usage:
   aitigo help
-  aitigo check
+  aitigo check [dir]
+  aitigo check:boundary
   aitigo make:crud <module> [--force]
   aitigo make:module <module>
   aitigo make:controller <Name> --module <module> [--force]
   aitigo make:service <Name> --module <module> [--force]
   aitigo make:repository <Name> --module <module> [--force]
+  aitigo templates
+  aitigo init <templateId> <dir>
 
 Examples:
   aitigo check
+  aitigo check .
+  aitigo check:boundary
   aitigo make:crud user
   aitigo make:crud user --force
   aitigo make:module user
   aitigo make:controller UserController --module user
   aitigo make:service UserService --module user --force
   aitigo make:repository UserRepository --module user
+  aitigo templates
+  aitigo init next-ts ./my-app
 `
 
 func commands() map[string]commandHandler {
 	return map[string]commandHandler{
 		"check":           runCheck,
+		"check:boundary":  runBoundaryCheck,
 		"make:crud":       makeCrud,
 		"make:module":     makeModule,
 		"make:controller": makeController,
 		"make:service":    makeService,
 		"make:repository": makeRepository,
+		"templates":       runTemplates,
+		"init":            runInit,
 	}
 }
 

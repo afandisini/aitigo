@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {},
+  "include": [
+    "../**/*"
+  ],
+  "exclude": [
+    "../node_modules",
+    "../.output",
+    "../dist"
+  ]
+}
