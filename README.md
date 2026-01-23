@@ -9,6 +9,51 @@
 
 ---
 
+## Quickstart
+
+Build CLI:
+
+```
+go build -o aitigo ./cmd/aitigo
+```
+
+Generate middleware example:
+
+```
+go run ./examples/http-middleware
+```
+
+Run migrations:
+
+```
+aitigo migrate create init_schema
+aitigo migrate up
+```
+
+---
+
+## Installation
+
+Install via Go:
+
+```
+go install github.com/afandisini/aitigo/cmd/aitigo@latest
+```
+
+Make sure `$GOPATH/bin` is in your PATH:
+
+```
+go env GOPATH
+```
+
+Verifikasi:
+
+```
+aitigo --help
+```
+
+---
+
 ## Tujuan dan Filosofi
 
 - **Domain murni**: domain tidak tahu HTTP, DB, atau framework.
@@ -27,6 +72,9 @@ aitigo/
 |   |-- app/                     # HTTP layer, kernel
 |   |-- domain/                  # Entity, service, repo interface
 |   `-- infra/                   # DB, cache, external implementation
+|-- pkg/                         # Framework packages (middleware, observability, db, integrations)
+|-- docs/                        # Documentation
+|-- examples/                    # Usage examples
 |-- templates/                   # Project templates (next-ts, nuxt-ts)
 |-- ARCHITECTURE.md
 |-- CONVENTIONS.md
@@ -53,6 +101,12 @@ Atau build binary:
 go build -o aitigo ./cmd/aitigo
 ```
 
+Windows:
+
+```
+go build -o aitigo.exe ./cmd/aitigo
+```
+
 ---
 
 ## CLI Commands
@@ -60,6 +114,9 @@ go build -o aitigo ./cmd/aitigo
 ```
 aitigo help
 aitigo check
+aitigo migrate up|down|status [--dir dir] [--dsn dsn] [--driver driver]
+aitigo migrate create <name> [--dir dir]
+aitigo version
 aitigo make:module <module>
 aitigo make:controller <Name> --module <module> [--force]
 aitigo make:service <Name> --module <module> [--force]
@@ -190,6 +247,31 @@ internal/app/http/controller/article_controller.go
 - Infra **tidak boleh** mengubah aturan domain.
 
 Rujuk detail di `ARCHITECTURE.md` dan `CONVENTIONS.md`.
+
+---
+
+## Docs
+
+Index: `docs/README.md`
+
+- Middleware: `docs/middleware.md`
+- Observability: `docs/observability.md`
+- Database & migrations: `docs/database.md`, `docs/migrations.md`
+- Integrations: `docs/integrations.md`
+- Testing utilities: `docs/testing.md`
+- Tutorials: `docs/tutorial-jwt.md`, `docs/tutorial-clean-architecture.md`
+
+---
+
+## Examples
+
+- `examples/http-middleware`
+- `examples/observability`
+- `examples/migrations`
+- `examples/integrations/redis`
+- `examples/integrations/s3`
+- `examples/integrations/oidc`
+- `examples/testing`
 
 ---
 

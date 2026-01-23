@@ -35,3 +35,35 @@ jobs:
 
       - name: AitiGo boundary check
         run: go run ./cmd/aitigo check
+
+  build-binary:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Build (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: go build -o aitigo ./cmd/aitigo
+
+      - name: Build (Windows)
+        if: runner.os == 'Windows'
+        run: go build -o aitigo.exe ./cmd/aitigo
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: aitigo-${{ runner.os }}
+          path: |
+            aitigo
+            aitigo.exe

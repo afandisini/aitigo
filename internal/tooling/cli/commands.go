@@ -15,6 +15,9 @@ Usage:
   aitigo help
   aitigo check [dir]
   aitigo check:boundary
+  aitigo migrate up|down|status [--dir dir] [--dsn dsn] [--driver driver]
+  aitigo migrate create <name> [--dir dir]
+  aitigo version
   aitigo make:crud <module> [--force]
   aitigo make:module <module>
   aitigo make:controller <Name> --module <module> [--force]
@@ -27,6 +30,10 @@ Examples:
   aitigo check
   aitigo check .
   aitigo check:boundary
+  aitigo migrate up
+  aitigo migrate status --dir ./migrations
+  aitigo migrate create add_users_table
+  aitigo version
   aitigo make:crud user
   aitigo make:crud user --force
   aitigo make:module user
@@ -41,6 +48,8 @@ func commands() map[string]commandHandler {
 	return map[string]commandHandler{
 		"check":           runCheck,
 		"check:boundary":  runBoundaryCheck,
+		"migrate":         runMigrate,
+		"version":         runVersion,
 		"make:crud":       makeCrud,
 		"make:module":     makeModule,
 		"make:controller": makeController,
