@@ -254,6 +254,7 @@ Rujuk detail di `ARCHITECTURE.md` dan `CONVENTIONS.md`.
 
 Index: `docs/README.md`
 
+- Architecture structure: `docs/structure.md`
 - Middleware: `docs/middleware.md`
 - Observability: `docs/observability.md`
 - Database & migrations: `docs/database.md`, `docs/migrations.md`

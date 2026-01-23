@@ -34,7 +34,8 @@ jobs:
         run: go test ./...
 
       - name: AitiGo boundary check
-        run: go run ./cmd/aitigo check
+        # Run against a sample project since this repo has no .aitigo/template.json.
+        run: go run ./cmd/aitigo check ./internal/tooling/checker/testdata/sample-project
 
   build-binary:
     runs-on: ${{ matrix.os }}

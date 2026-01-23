@@ -1,0 +1,19 @@
+{
+  "id": "sample-project",
+  "name": "Sample Project",
+  "description": "Minimal project used by CI to run aitigo check.",
+  "type": "app",
+  "packageManager": "none",
+  "init": {
+    "copy": true
+  },
+  "check": {
+    "commands": [
+      {
+        "name": "go-test",
+        "run": "go test ./...",
+        "optional": false
+      }
+    ]
+  }
+}
