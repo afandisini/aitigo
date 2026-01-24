@@ -11,6 +11,10 @@ import (
 
 var ErrTemplateNotFound = fmt.Errorf("template not found")
 
+var templateAliases = map[string]string{
+	"gin": "gin-basic",
+}
+
 func List() ([]Manifest, error) {
 	paths, err := fs.Glob(embeddedTemplates, "templates/*/template.json")
 	if err != nil {
@@ -44,6 +48,7 @@ func FindByID(id string) (Manifest, error) {
 }
 
 func LoadManifest(id string) (Manifest, error) {
+	id = resolveTemplateID(id)
 	if id == "" {
 		return Manifest{}, ErrTemplateNotFound
 	}
@@ -56,6 +61,16 @@ func LoadManifest(id string) (Manifest, error) {
 		return Manifest{}, err
 	}
 	return manifest, nil
+}
+
+func resolveTemplateID(id string) string {
+	if id == "" {
+		return id
+	}
+	if resolved, ok := templateAliases[id]; ok {
+		return resolved
+	}
+	return id
 }
 
 func readManifest(manifestPath string) (Manifest, error) {

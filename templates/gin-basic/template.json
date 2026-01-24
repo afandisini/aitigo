@@ -1,0 +1,12 @@
+{
+  "id":"gin-basic",
+  "name":"Gin (basic)",
+  "description":"Gin HTTP API (minimal) + Go modules",
+  "type":"backend",
+  "packageManager":"go",
+  "init":{"copy":true},
+  "check":{"commands":[
+    {"name":"go-test","run":"go test ./..."},
+    {"name":"go-build","run":"go build ./..."}
+  ]}
+}

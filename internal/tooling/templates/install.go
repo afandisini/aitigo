@@ -17,12 +17,13 @@ func Install(templateID, targetDir string) error {
 		return fmt.Errorf("target dir is required")
 	}
 
-	manifestPath := path.Join("templates", templateID, "template.json")
-	if _, err := LoadManifest(templateID); err != nil {
+	resolvedID := resolveTemplateID(templateID)
+	manifestPath := path.Join("templates", resolvedID, "template.json")
+	if _, err := LoadManifest(resolvedID); err != nil {
 		return err
 	}
 
-	sourceRoot := path.Join("templates", templateID)
+	sourceRoot := path.Join("templates", resolvedID)
 	if err := copyEmbeddedDir(sourceRoot, targetDir); err != nil {
 		return err
 	}
@@ -51,6 +52,7 @@ func copyEmbeddedDir(sourceRoot, targetDir string) error {
 		if rel == entryPath {
 			return fmt.Errorf("unexpected template path: %s", entryPath)
 		}
+		rel = normalizeTemplatePath(rel)
 		targetPath := filepath.Join(targetDir, filepath.FromSlash(rel))
 
 		if d.IsDir() {
@@ -66,4 +68,14 @@ func copyEmbeddedDir(sourceRoot, targetDir string) error {
 		}
 		return os.WriteFile(targetPath, data, 0o644)
 	})
+}
+
+func normalizeTemplatePath(rel string) string {
+	if strings.HasSuffix(rel, ".go.txt") {
+		return strings.TrimSuffix(rel, ".txt")
+	}
+	if strings.HasSuffix(rel, "go.mod.txt") || strings.HasSuffix(rel, "go.sum.txt") {
+		return strings.TrimSuffix(rel, ".txt")
+	}
+	return rel
 }

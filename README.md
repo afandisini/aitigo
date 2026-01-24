@@ -122,6 +122,9 @@ aitigo make:controller <Name> --module <module> [--force]
 aitigo make:service <Name> --module <module> [--force]
 aitigo make:repository <Name> --module <module> [--force]
 aitigo make:crud <module> [--force]
+aitigo templates
+aitigo init <templateId> <dir>
+aitigo new <name> --template <templateId>
 ```
 
 Contoh:
@@ -205,6 +208,44 @@ Catatan Windows:
 
 Catatan template Nuxt:
 - `templates/nuxt-ts` menyertakan shim `nuxt/config` dan placeholder `.nuxt/tsconfig.json` agar editor tidak error sebelum install dependency.
+
+---
+
+## Gin template (optional)
+
+Gin hanya digunakan sebagai transport/adaptor di pinggir (cmd/api + internal/transport/http/gin).
+Domain/app/infra tetap agnostic sesuai aturan AitiGo.
+
+List template:
+
+```
+aitigo templates
+```
+
+Init project (alias `gin`):
+
+```
+aitigo new my-api --template gin-basic
+aitigo new my-api --template gin
+```
+
+Run server:
+
+```
+cd my-api
+go run ./cmd/api
+```
+
+Run checks:
+
+```
+cd ..
+aitigo check ./my-api
+```
+
+Catatan template Gin:
+- Versi template yang di-embed menyimpan file Go dan `go.mod`/`go.sum` dengan suffix `.txt` agar tidak melanggar batasan `go:embed`.
+- `aitigo init`/`aitigo new` otomatis menuliskan file `.go`, `go.mod`, dan `go.sum` ke project hasil generate.
 
 ---
 

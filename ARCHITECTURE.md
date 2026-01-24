@@ -69,3 +69,4 @@ Alur: Controller -> Service -> Repository Interface -> Infra Repo -> DB.
 - Repository interface di domain: agar domain tetap murni dan infra dapat diganti tanpa ubah bisnis.
 - `internal/tooling/cli`: CLI generator internal untuk scaffolding tanpa dependency eksternal.
 - `templates/`: aset scaffold frontend, di-embed oleh `internal/tooling/templates` karena batasan go:embed.
+- `templates/gin-basic`: template Gin minimal; file Go dan go.mod/go.sum di versi embed memakai suffix `.txt` untuk menghindari batasan go:embed.

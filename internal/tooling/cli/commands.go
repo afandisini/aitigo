@@ -25,6 +25,7 @@ Usage:
   aitigo make:repository <Name> --module <module> [--force]
   aitigo templates
   aitigo init <templateId> <dir>
+  aitigo new <name> --template <templateId>
 
 Examples:
   aitigo check
@@ -42,6 +43,7 @@ Examples:
   aitigo make:repository UserRepository --module user
   aitigo templates
   aitigo init next-ts ./my-app
+  aitigo new my-api --template gin-basic
 `
 
 func commands() map[string]commandHandler {
@@ -57,6 +59,7 @@ func commands() map[string]commandHandler {
 		"make:repository": makeRepository,
 		"templates":       runTemplates,
 		"init":            runInit,
+		"new":             runNew,
 	}
 }
 
