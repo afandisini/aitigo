@@ -10,6 +10,16 @@
 - CLI: add `aitigo version` and improve `migrate` help UX
 - Docs: add installation instructions and Windows build guidance
 
+## v0.1.2
+
+- Add optional Gin API template (transport-only)
+- Gin integrated strictly as HTTP transport adapter (cmd/api + internal/transport/http/gin)
+- Preserve existing MVC and boundary architecture (domain/app/infra unchanged)
+- Register Gin template in CLI scaffolding (`--template gin` / `gin-basic`)
+- Add minimal `/health` endpoint for validation
+- Add sample Gin project for checker testdata to keep CI passing
+- Docs: document Gin template usage and framework-agnostic positioning
+
 ## v0.1.1
 
 - Fix Nuxt TypeScript template config by properly importing defineNuxtConfig
